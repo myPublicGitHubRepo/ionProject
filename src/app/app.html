@@ -1,0 +1,157 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle icon-only>
+      <ion-icon name='menu' [ngStyle]="{'color': connEstablished ? 'green' : 'red'}"></ion-icon>
+    </button>
+        <ion-title *ngIf="!isLoggedIn">
+
+            Ionic Blank
+        </ion-title>
+        <ion-title *ngIf="isLoggedIn">
+
+            Room name: {{room}}
+        </ion-title>
+        <div class="videoContainerLocal">
+            <!-- [ngStyle]="{'visibility': this.isLoggedIn ? 'visible': 'hidden'}"-->
+            <video id="localVideo"></video>
+            <!--<meter id="localVolume" class="volume" min="-45" max="-20" high="-25" low="-40"></meter>-->
+        </div>
+    </ion-navbar>
+</ion-header>
+
+<!--- ############# Menu ############ -->
+<ion-menu type="overlay" [content]="content">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <div *ngIf="webrtc && webrtc.roomName == room && connEstablished">
+                <ion-list-header>
+                    Local settings
+                </ion-list-header>
+                <button ion-item menuClose *ngIf="!audioMuted" (tap)="muteAudio()">mute local audio</button>
+                <button ion-item menuClose *ngIf="audioMuted" (tap)="unmuteAudio()">unmute local audio</button>
+
+                <button ion-item menuClose *ngIf="!videoMuted" (tap)="muteVideo()">mute local video</button>
+                <button ion-item menuClose *ngIf="videoMuted" (tap)="unmuteVideo()">unmute local video</button>
+
+                <button ion-item menuClose *ngIf="!audioMuted" (tap)="stopAudio()">stop local audio</button>
+                <button ion-item menuClose *ngIf="audioMuted" (tap)="startAudio()">start local audio</button>
+
+                <button ion-item menuClose *ngIf="video" (tap)="stopVideo()">stop local video</button>
+                <button ion-item menuClose *ngIf="!video" (tap)="startVideo()">start local video</button>
+
+                <ion-list-header>
+                    Remote things
+                </ion-list-header>
+
+                <button ion-item menuClose *ngIf="!audioRemoteMuted" (tap)="muteRemoteAudio()">mute remote audio</button>
+                <button ion-item menuClose *ngIf="audioRemoteMuted" (tap)="unmuteRemoteAudio()">unmute remote audio</button>
+
+                <button ion-item menuClose *ngIf="!videoRemoteMuted" (tap)="muteRemoteVideo()">mute remote video</button>
+                <button ion-item menuClose *ngIf="videoRemoteMuted" (tap)="unmuteRemoteVideo()">unmute remote video</button>
+            </div>
+            <ion-list-header>
+                Other things
+            </ion-list-header>
+            <button ion-item menuClose (tap)="joinRoom()" *ngIf="webrtc && readyToCall && webrtc.roomName != room">Join room</button>
+            <button ion-item menuClose (tap)="logOut()">Log out</button>
+
+        </ion-list>
+
+
+    </ion-content>
+</ion-menu>
+
+<ion-content #content>
+
+    <div *ngIf="isLoggedIn else loggedInIf">
+
+        <!--<ion-label>video currently {{video}}</ion-label>-->
+        <!--<ion-toggle checked="{{video}}" (tap)="videoChangedTap()" (ionChange)="videoChanged()" ></ion-toggle>-->
+
+
+
+        <div *ngIf="webrtc && webrtc.roomName == room && connEstablished; else waiting_content">
+
+
+
+
+
+            <ion-scroll scrollY="true" style="height: 200px;">
+                <ion-list *ngIf=" messages.length>0" class="messageList">
+
+                    <ion-item *ngFor="let message of messages">
+                        <h2>{{ message.message }}</h2>
+                        <p>From: {{ message.person }}</p>
+                        <ion-note item-end>{{ message.date }}</ion-note>
+                    </ion-item>
+
+                </ion-list>
+            </ion-scroll>
+            <ion-item style="border-top: 1px solid black">
+                <ion-input type="text" value="" placeholder="message" [(ngModel)]="websocketMessage"></ion-input>
+                <button item-right ion-button clear (tap)="sendMessageWebsocket()" [disabled]="websocketMessage == ''" item-right>send</button>
+
+            </ion-item>
+
+
+
+
+            <!-- ####### Since websockets are (almost) always superior, we should newer use WebRTC now  #####
+                <div>
+                    <ion-input type="text" value="" placeholder="message" [(ngModel)]="webRTCMessage"></ion-input>
+                    <button ion-button (tap)="sendMessageWebRTC()">send webRTC</button>
+                    <ion-textarea id="webrtcArea" readonly="true" style="border: solid 1px"></ion-textarea>
+                </div>
+                -->
+            <!-- REMOTE VIDEO -->
+            <div class="videoContainerRemote">
+                <!-- [ngStyle]="{'visibility': this.isLoggedIn ? 'visible': 'hidden'}"-->
+                <div id="remoteVideo" style="height: 150px; border: 1px solid"></div>
+                <!--<meter id="localVolume" class="volume" min="-45" max="-20" high="-25" low="-40"></meter>-->
+            </div>
+        </div>
+
+        <!--<button ion-button (tap)="startVideo()" *ngIf="webrtc &&  webrtc.roomName == room && !video && connEstablished">Start video</button>
+            <button ion-button (tap)="stopVideo()" *ngIf="webrtc && webrtc.roomName == room && video && connEstablished">Stop video</button>-->
+
+
+        <!-- ELSE BLOCk -->
+        <ng-template #waiting_content>
+            <h2>Waiting...</h2>
+            <ion-spinner></ion-spinner>
+
+
+        </ng-template>
+
+
+
+
+    </div>
+    <!--"start page" settings-->
+    <ng-template #loggedInIf>
+        <ion-list>
+            <ion-item>
+                <ion-label fixed>Room name</ion-label>
+                <ion-input type="text" value="" placeholder="enter name here" [(ngModel)]="room"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Auto join</ion-label>
+                <ion-toggle checked="{{autoJoin}}" (ionChange)="autoJoin = !autoJoin"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Video</ion-label>
+                <ion-toggle checked="{{video}}" (ionChange)="video = !video"></ion-toggle>
+            </ion-item>
+        </ion-list>
+        <div padding>
+            <button ion-button color="primary" block (tap)="signIn()">Enter room</button>
+        </div>
+
+
+    </ng-template>
+</ion-content>
