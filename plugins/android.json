@@ -13,6 +13,9 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
@@ -26,9 +29,11 @@
             "PACKAGE_NAME": "io.ionic.starter"
         },
         "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-media-capture": {
+            "XWALK_VERSION": "23+",
+            "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+            "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+            "XWALK_MODE": "embedded",
+            "XWALK_MULTIPLEAPK": "true",
             "PACKAGE_NAME": "io.ionic.starter"
         }
     },

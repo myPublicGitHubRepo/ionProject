@@ -47,14 +47,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-crosswalk-webview": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-crosswalk-webview@1.8.0"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-media-capture": {
         "source": {
             "type": "registry",
@@ -77,6 +69,14 @@
             "id": "cordova-plugin-compat@^1.0.0"
         },
         "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-crosswalk-webview": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-crosswalk-webview@2.3.0"
+        },
+        "is_top_level": true,
         "variables": {}
     }
 }
