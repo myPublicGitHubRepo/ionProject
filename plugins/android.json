@@ -7,15 +7,15 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
         "cordova-plugin-crosswalk-webview": {
             "XWALK_VERSION": "23+",
             "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
             "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
             "XWALK_MODE": "embedded",
             "XWALK_MULTIPLEAPK": "true",
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-console": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
         "cordova-plugin-device": {
@@ -33,9 +33,19 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
         "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "io.ionic.starter"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        }
+    }
 }

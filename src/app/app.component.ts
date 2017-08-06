@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
 
 
 
+declare var cordova;
 //https://simplewebrtc.com/notsosimple.html
 //https://github.com/andyet/SimpleWebRTC
 
@@ -48,25 +48,72 @@ export class MyApp {
 
 
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public androidPermissions: AndroidPermissions) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) { //public androidPermissions: AndroidPermissions
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      //this.checkPermission();
+      debugger;
+      var permissions = cordova.plugins.permissions;
+
+
+      permissions.hasPermission(permissions.CAMERA, function (status) {
+        if (status.hasPermission) {
+          console.log("Yes :D ");
+        }
+        else {
+          console.warn("No :( I will ask for permission now");
+
+          permissions.requestPermission(permissions.CAMERA, function success(status) {
+            if (!status.hasPermission) { console.log("cam error") };
+          }, function error() {
+            console.warn('Camera permission is not turned on');
+          });
+        }
+      });
+
+
+      permissions.hasPermission(permissions.RECORD_AUDIO, function (status) {
+        if (status.hasPermission) {
+          console.log("Yes :D ");
+        }
+        else {
+          console.warn("No Mic :( I will ask for permission now");
+
+          permissions.requestPermission(permissions.RECORD_AUDIO, function success(status) {
+            if (!status.hasPermission) { console.log("audio error") };
+          }, function error() {
+            console.warn('audio permission is not turned on');
+          });
+
+        }
+      });
     });
   }
 
   openPage() {
     alert("open");
   }
-
-  checkPermission() {
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-      success => console.log('Permission granted'),
-      err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
-    );
-  }
+  /*
+    checkPermission() {
+      this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+        success => console.log('Camera Permission granted'),
+        err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+      );
+  
+      this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.RECORD_AUDIO).then(
+        success => console.log('Mic Permission granted'),
+        err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.RECORD_AUDIO)
+      );
+  
+  
+  
+  
+  
+    }
+    */
 
 
 
@@ -76,7 +123,6 @@ export class MyApp {
   ///////////////////////////////////
 
   ngAfterViewInit() {
-    this.checkPermission();
   }
 
   muteAudio() {
