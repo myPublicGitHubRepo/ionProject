@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
+
 
 
 
@@ -46,7 +48,7 @@ export class MyApp {
 
 
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public androidPermissions: AndroidPermissions) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -59,7 +61,12 @@ export class MyApp {
     alert("open");
   }
 
-
+  checkPermission() {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+      success => console.log('Permission granted'),
+      err => this.androidPermissions.requestPermissions(this.androidPermissions.PERMISSION.CAMERA)
+    );
+  }
 
 
 
@@ -69,7 +76,7 @@ export class MyApp {
   ///////////////////////////////////
 
   ngAfterViewInit() {
-
+    this.checkPermission();
   }
 
   muteAudio() {
@@ -262,7 +269,10 @@ export class MyApp {
 
     // we got access to the camera
     this.webrtc.on('localStream', (stream) => {
-      console.log("got local stream")
+
+      console.log("got local stream");
+      console.log(stream);
+
 
     });
     // we did not get access to the camera
