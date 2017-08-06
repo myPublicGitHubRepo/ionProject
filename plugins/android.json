@@ -33,19 +33,9 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
-        "cordova-plugin-media": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
         "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "io.ionic.starter"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        }
-    }
+    "dependent_plugins": {}
 }
