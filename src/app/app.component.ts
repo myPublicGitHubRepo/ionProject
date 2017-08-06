@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
 
 
 
@@ -48,14 +49,13 @@ export class MyApp {
 
 
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) { //public androidPermissions: AndroidPermissions
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public modalController: ModalController) { //public androidPermissions: AndroidPermissions
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
       //this.checkPermission();
-      debugger;
       var permissions = cordova.plugins.permissions;
 
 
@@ -273,7 +273,13 @@ export class MyApp {
     //this.webrtc.config.media.video = false;
   }
 
+  modalLang() {
+
+    let langModal = this.modalController.create('LangTestPage');
+    langModal.present();
+  }
   signIn() {
+
     if (this.room != "") {
 
       this.initWebRTC();

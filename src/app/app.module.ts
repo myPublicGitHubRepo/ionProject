@@ -4,10 +4,11 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 //import { AndroidPermissions } from '@ionic-native/android-permissions';
-
+import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { LanguagesProvider } from '../providers/languages/languages.provider';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -27,7 +29,8 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     //AndroidPermissions,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    LanguagesProvider
   ]
 })
 export class AppModule { }

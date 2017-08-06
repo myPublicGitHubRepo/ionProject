@@ -1,0 +1,28 @@
+<!--
+  Generated template for the LangTestPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">Close</button>
+        </ion-buttons>
+        <ion-title>langTest</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <li *ngFor="let lang of languagesProvider.languages">
+        {{lang.nativeName}}
+    </li>
+    <div *ngIf="languagesProvider.languages.length<1">
+        <h1>
+            No languages found
+        </h1>
+    </div>
+</ion-content>
