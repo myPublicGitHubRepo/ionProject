@@ -2,8 +2,11 @@
     <ion-scroll scrollY="true" style="height: 200px;">
       <ion-list *ngIf=" messages.length>0" class="messageList">
         <ion-item *ngFor="let message of messages">
-          <h2>{{ message.message }}</h2>
-          <p>From: {{ message.person }}</p>
+          <!--TODO check for message type-->
+
+          <span *ngIf="message.type === 1" style="white-space: pre;">{{ message.msg }}</span>
+          <img src="{{message.msg}}" alt="image" *ngIf="message.type === 2"/>
+          <p>From: {{ message.sender }}</p>
           <ion-note item-end>{{ message.date }}</ion-note>
         </ion-item>
       </ion-list>

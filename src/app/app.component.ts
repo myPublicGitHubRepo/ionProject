@@ -7,7 +7,6 @@ import { ChatComponent } from '../components/chat/chat';
 
 
 
-
 declare var cordova;
 //https://simplewebrtc.com/notsosimple.html
 //https://github.com/andyet/SimpleWebRTC
@@ -206,27 +205,27 @@ export class MyApp {
   }
 
   sendMessage(message){
-    this.sendMessageWebsocket();
+    this.sendMessageWebsocket(message);
   }
 
-  sendMessageWebsocket() {
+  receivedMessage(message){
+    this.Chat.receivedMessage(message);
+  }
+
+  sendMessageWebsocket(message) {
       this.webrtc.sendToAll('websocket-message', {
-        message: this.websocketMessage
+        message: message
       });
   }
 
-  sendMessageWebRTC() {
+  sendMessageWebRTC(message) {
     this.webrtc.sendDirectlyToAll(
       'webrtc-message',//channel name
       'text',//type of message, will be data.type
       {
-        payload: this.webRTCMessage//will be data.payload
+        payload: message//will be data.payload
       }
     );
-
-    this.appendWebrtcText(this.webRTCMessage);
-
-    this.webRTCMessage = "";
   }
 
   appendWebsocketText(message) {
@@ -375,8 +374,10 @@ export class MyApp {
 
       if (message.type === 'websocket-message') {
         console.log('websocket-message: ' + message.payload.message);
-        // this.appendWebsocketText("Remote: " + message.payload.message);
+        this.receivedMessage(message.payload.message);
 
+        // this.appendWebsocketText("Remote: " + message.payload.message);
+        /*
         this.messages.push(
           {
             date: new Date().toLocaleTimeString(),
@@ -386,6 +387,7 @@ export class MyApp {
         );
 
         this.websocketMessage = "";
+        */
       }
 
 
@@ -398,12 +400,13 @@ export class MyApp {
       }
 
       if (channel === 'webrtc-message') {
-
+        this.receivedMessage(data);
+        /*
         if (data.type === 'text') {
           console.log('webrtc-message: ' + data.payload.payload);
           this.appendWebrtcText(data.payload.payload);
         }
-
+        */
       }
 
     });

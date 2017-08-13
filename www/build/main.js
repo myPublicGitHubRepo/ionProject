@@ -347,21 +347,22 @@ var MyApp = (function () {
         this.room = "";
     };
     MyApp.prototype.sendMessage = function (message) {
-        this.sendMessageWebsocket();
+        this.sendMessageWebsocket(message);
     };
-    MyApp.prototype.sendMessageWebsocket = function () {
+    MyApp.prototype.receivedMessage = function (message) {
+        this.Chat.receivedMessage(message);
+    };
+    MyApp.prototype.sendMessageWebsocket = function (message) {
         this.webrtc.sendToAll('websocket-message', {
-            message: this.websocketMessage
+            message: message
         });
     };
-    MyApp.prototype.sendMessageWebRTC = function () {
+    MyApp.prototype.sendMessageWebRTC = function (message) {
         this.webrtc.sendDirectlyToAll('webrtc-message', //channel name
         'text', //type of message, will be data.type
         {
-            payload: this.webRTCMessage //will be data.payload
+            payload: message //will be data.payload
         });
-        this.appendWebrtcText(this.webRTCMessage);
-        this.webRTCMessage = "";
     };
     MyApp.prototype.appendWebsocketText = function (message) {
         var websocketArea = document.getElementById('websocketArea');
@@ -471,13 +472,19 @@ var MyApp = (function () {
             }
             if (message.type === 'websocket-message') {
                 console.log('websocket-message: ' + message.payload.message);
+                _this.receivedMessage(message.payload.message);
                 // this.appendWebsocketText("Remote: " + message.payload.message);
-                _this.messages.push({
+                /*
+                this.messages.push(
+                  {
                     date: new Date().toLocaleTimeString(),
                     message: message.payload.message,
                     person: "remote"
-                });
-                _this.websocketMessage = "";
+                  }
+                );
+        
+                this.websocketMessage = "";
+                */
             }
         });
         this.webrtc.on('channelMessage', function (peer, channel, data) {
@@ -485,10 +492,13 @@ var MyApp = (function () {
                 return;
             }
             if (channel === 'webrtc-message') {
+                _this.receivedMessage(data);
+                /*
                 if (data.type === 'text') {
-                    console.log('webrtc-message: ' + data.payload.payload);
-                    _this.appendWebrtcText(data.payload.payload);
+                  console.log('webrtc-message: ' + data.payload.payload);
+                  this.appendWebrtcText(data.payload.payload);
                 }
+                */
             }
         });
         // a peer video has been added
@@ -620,13 +630,27 @@ var ChatComponent = (function () {
     };
     ChatComponent.prototype.sendMessage = function () {
         if (this.message != "") {
-            this.messages.push(new __WEBPACK_IMPORTED_MODULE_1__app_models_message_model__["a" /* MessageModel */](new Date().toLocaleTimeString(), this.message, "me"));
+            var msgM = new __WEBPACK_IMPORTED_MODULE_1__app_models_message_model__["a" /* MessageModel */](new Date().toLocaleTimeString(), 
+            //this.message.replace(/\n/g, "<br />"),
+            this.message, "me");
+            this.messages.push(msgM);
             //call method in parent
-            this.sender(this.message);
+            this.sender(msgM);
             this.message = "";
         }
     };
     ChatComponent.prototype.receivedMessage = function (message) {
+        this.messages.push(new __WEBPACK_IMPORTED_MODULE_1__app_models_message_model__["a" /* MessageModel */](new Date().toLocaleTimeString(), message.msg, "remote"));
+        /*
+        switch(message.type){
+          case MessageTypes.text:
+    
+            break;
+    
+          default:
+            break;
+        }
+        */
     };
     ChatComponent.prototype.getMessages = function () {
         return this.messages;
@@ -639,7 +663,7 @@ __decorate([
 ], ChatComponent.prototype, "params", void 0);
 ChatComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'chat-component',template:/*ion-inline-start:"D:\Programming\ionic\splinxs\ionProject\src\components\chat\chat.html"*/'<div>\n    <ion-scroll scrollY="true" style="height: 200px;">\n      <ion-list *ngIf=" messages.length>0" class="messageList">\n        <ion-item *ngFor="let message of messages">\n          <h2>{{ message.message }}</h2>\n          <p>From: {{ message.person }}</p>\n          <ion-note item-end>{{ message.date }}</ion-note>\n        </ion-item>\n      </ion-list>\n    </ion-scroll>\n    <ion-item style="border-top: 1px solid black">\n      <ion-textarea type="text" value="" placeholder="message" [(ngModel)]="message"></ion-textarea>\n      <button item-right ion-button clear (tap)="sendMessage()" [disabled]="message == \'\'" item-right>send</button>\n    </ion-item>\n  </div>'/*ion-inline-end:"D:\Programming\ionic\splinxs\ionProject\src\components\chat\chat.html"*/
+        selector: 'chat-component',template:/*ion-inline-start:"D:\Programming\ionic\splinxs\ionProject\src\components\chat\chat.html"*/'<div>\n    <ion-scroll scrollY="true" style="height: 200px;">\n      <ion-list *ngIf=" messages.length>0" class="messageList">\n        <ion-item *ngFor="let message of messages">\n          <!--TODO check for message type-->\n\n          <span *ngIf="message.type === 1" style="white-space: pre;">{{ message.msg }}</span>\n          <img src="{{message.msg}}" alt="image" *ngIf="message.type === 2"/>\n          <p>From: {{ message.sender }}</p>\n          <ion-note item-end>{{ message.date }}</ion-note>\n        </ion-item>\n      </ion-list>\n    </ion-scroll>\n    <ion-item style="border-top: 1px solid black">\n      <ion-textarea type="text" value="" placeholder="message" [(ngModel)]="message"></ion-textarea>\n      <button item-right ion-button clear (tap)="sendMessage()" [disabled]="message == \'\'" item-right>send</button>\n    </ion-item>\n  </div>'/*ion-inline-end:"D:\Programming\ionic\splinxs\ionProject\src\components\chat\chat.html"*/
     }),
     __metadata("design:paramtypes", [])
 ], ChatComponent);
@@ -690,10 +714,10 @@ ComponentsModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__enums_messageTypes_enum__ = __webpack_require__(271);
 
 var MessageModel = (function () {
-    function MessageModel(date, message, sender, type) {
+    function MessageModel(date, msg, sender, type) {
         if (type === void 0) { type = __WEBPACK_IMPORTED_MODULE_0__enums_messageTypes_enum__["a" /* MessageTypes */].text; }
         this.date = date;
-        this.message = message;
+        this.msg = msg;
         this.sender = sender;
         this.type = type;
     }
