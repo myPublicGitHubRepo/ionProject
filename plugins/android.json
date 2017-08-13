@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "io.ionic.starter"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "io.ionic.starter"
         },
@@ -31,9 +34,6 @@
             "PACKAGE_NAME": "io.ionic.starter"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "io.ionic.starter"
-        },
-        "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "io.ionic.starter"
         }
     },

@@ -1,4 +1,4 @@
-webpackJsonp([0],{
+webpackJsonp([1],{
 
 /***/ 106:
 /***/ (function(module, exports) {
@@ -13,26 +13,86 @@ webpackEmptyAsyncContext.id = 106;
 
 /***/ }),
 
-/***/ 147:
-/***/ (function(module, exports) {
+/***/ 148:
+/***/ (function(module, exports, __webpack_require__) {
 
-function webpackEmptyAsyncContext(req) {
-	return new Promise(function(resolve, reject) { reject(new Error("Cannot find module '" + req + "'.")); });
-}
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 147;
+var map = {
+	"../pages/lang-test/lang-test.module": [
+		264,
+		0
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+module.exports = webpackAsyncContext;
+webpackAsyncContext.id = 148;
 
 /***/ }),
 
-/***/ 191:
+/***/ 193:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LanguagesProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+/*
+  Generated class for the LanguagesProvider provider.
+
+  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+  for more info on providers and Angular DI.
+*/
+var LanguagesProvider = (function () {
+    function LanguagesProvider(http) {
+        var _this = this;
+        this.http = http;
+        this.languages = [];
+        console.log('Hello LanguagesProvider Provider');
+        this.http.get('https://splinxs.com/fullLangs.json').map(function (res) { return res.json(); }).subscribe(function (data) {
+            _this.languages = data;
+        });
+    }
+    return LanguagesProvider;
+}());
+LanguagesProvider = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+], LanguagesProvider);
+
+//# sourceMappingURL=languages.provider.js.map
+
+/***/ }),
+
+/***/ 194:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(192);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(213);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -40,18 +100,20 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 210:
+/***/ 213:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(259);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(260);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(149);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_languages_languages_provider__ = __webpack_require__(193);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -66,6 +128,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 //import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
+
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -74,23 +138,29 @@ var AppModule = (function () {
 AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */]
+            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_home_home__["a" /* HomePage */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */])
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */], {}, {
+                links: [
+                    { loadChildren: '../pages/lang-test/lang-test.module#LangTestPageModule', name: 'LangTestPage', segment: 'lang-test', priority: 'low', defaultHistory: [] }
+                ]
+            }),
+            __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* HttpModule */]
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
         entryComponents: [
-            __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */]
+            __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_home_home__["a" /* HomePage */]
         ],
         providers: [
             __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
             __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
             //AndroidPermissions,
-            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
+            { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] },
+            __WEBPACK_IMPORTED_MODULE_8__providers_languages_languages_provider__["a" /* LanguagesProvider */]
         ]
     })
 ], AppModule);
@@ -99,15 +169,15 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 259:
+/***/ 262:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(192);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(189);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -122,7 +192,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MyApp = (function () {
-    function MyApp(platform, statusBar, splashScreen) {
+    function MyApp(platform, statusBar, splashScreen, modalController) {
+        this.modalController = modalController;
         this.isLoggedIn = false;
         // grab the room from the URL
         //var room = location.search && location.search.split('?')[1];
@@ -146,40 +217,42 @@ var MyApp = (function () {
             statusBar.styleDefault();
             splashScreen.hide();
             //this.checkPermission();
-            debugger;
-            var permissions = cordova.plugins.permissions;
-            permissions.hasPermission(permissions.CAMERA, function (status) {
-                if (status.hasPermission) {
-                    console.log("Yes :D ");
-                }
-                else {
-                    console.warn("No :( I will ask for permission now");
-                    permissions.requestPermission(permissions.CAMERA, function success(status) {
-                        if (!status.hasPermission) {
-                            console.log("cam error");
-                        }
-                        ;
-                    }, function error() {
-                        console.warn('Camera permission is not turned on');
-                    });
-                }
-            });
-            permissions.hasPermission(permissions.RECORD_AUDIO, function (status) {
-                if (status.hasPermission) {
-                    console.log("Yes :D ");
-                }
-                else {
-                    console.warn("No Mic :( I will ask for permission now");
-                    permissions.requestPermission(permissions.RECORD_AUDIO, function success(status) {
-                        if (!status.hasPermission) {
-                            console.log("audio error");
-                        }
-                        ;
-                    }, function error() {
-                        console.warn('audio permission is not turned on');
-                    });
-                }
-            });
+            //do not check if website
+            if (platform.is("cordova")) {
+                var permissions = cordova.plugins.permissions;
+                permissions.hasPermission(permissions.CAMERA, function (status) {
+                    if (status.hasPermission) {
+                        console.log("Yes :D ");
+                    }
+                    else {
+                        console.warn("No :( I will ask for permission now");
+                        permissions.requestPermission(permissions.CAMERA, function success(status) {
+                            if (!status.hasPermission) {
+                                console.log("cam error");
+                            }
+                            ;
+                        }, function error() {
+                            console.warn('Camera permission is not turned on');
+                        });
+                    }
+                });
+                permissions.hasPermission(permissions.RECORD_AUDIO, function (status) {
+                    if (status.hasPermission) {
+                        console.log("Yes :D ");
+                    }
+                    else {
+                        console.warn("No Mic :( I will ask for permission now");
+                        permissions.requestPermission(permissions.RECORD_AUDIO, function success(status) {
+                            if (!status.hasPermission) {
+                                console.log("audio error");
+                            }
+                            ;
+                        }, function error() {
+                            console.warn('audio permission is not turned on');
+                        });
+                    }
+                });
+            }
         });
     }
     MyApp.prototype.openPage = function () {
@@ -319,6 +392,10 @@ var MyApp = (function () {
         //this.videoMuted = true;
         //this.webrtc.config.media.video = false;
     };
+    MyApp.prototype.modalLang = function () {
+        var langModal = this.modalController.create('LangTestPage');
+        langModal.present();
+    };
     MyApp.prototype.signIn = function () {
         if (this.room != "") {
             this.initWebRTC();
@@ -402,6 +479,7 @@ var MyApp = (function () {
         });
         // a peer video has been added
         this.webrtc.on('videoAdded', function (rtcVideo, peer) {
+            debugger;
             // if (!this.webrtc.config.media.video) return;
             console.log('video added, peer:', peer);
             console.log('video added, video:', rtcVideo);
@@ -446,22 +524,22 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/Zerododici/git/ionProject/src/app/app.html"*/'<ion-header>\n    <ion-navbar>\n        <button ion-button menuToggle icon-only>\n      <ion-icon name=\'menu\' [ngStyle]="{\'color\': connEstablished ? \'green\' : \'red\'}"></ion-icon>\n    </button>\n        <ion-title *ngIf="!isLoggedIn">\n\n            Ionic Blank\n        </ion-title>\n        <ion-title *ngIf="isLoggedIn">\n\n            Room name: {{room}}\n        </ion-title>\n        <div class="videoContainerLocal">\n            <!-- [ngStyle]="{\'visibility\': this.isLoggedIn ? \'visible\': \'hidden\'}"-->\n            <video id="localVideo"></video>\n            <!--<meter id="localVolume" class="volume" min="-45" max="-20" high="-25" low="-40"></meter>-->\n        </div>\n    </ion-navbar>\n</ion-header>\n\n<!--- ############# Menu ############ -->\n<ion-menu type="overlay" [content]="content">\n    <ion-header>\n        <ion-toolbar>\n            <ion-title>Menu</ion-title>\n        </ion-toolbar>\n    </ion-header>\n    <ion-content>\n        <ion-list>\n            <div *ngIf="webrtc && webrtc.roomName == room && connEstablished">\n                <ion-list-header>\n                    Local settings\n                </ion-list-header>\n                <button ion-item menuClose *ngIf="!audioMuted" (tap)="muteAudio()">mute local audio</button>\n                <button ion-item menuClose *ngIf="audioMuted" (tap)="unmuteAudio()">unmute local audio</button>\n\n                <button ion-item menuClose *ngIf="!videoMuted" (tap)="muteVideo()">mute local video</button>\n                <button ion-item menuClose *ngIf="videoMuted" (tap)="unmuteVideo()">unmute local video</button>\n\n                <button ion-item menuClose *ngIf="!audioMuted" (tap)="stopAudio()">stop local audio</button>\n                <button ion-item menuClose *ngIf="audioMuted" (tap)="startAudio()">start local audio</button>\n\n                <button ion-item menuClose *ngIf="video" (tap)="stopVideo()">stop local video</button>\n                <button ion-item menuClose *ngIf="!video" (tap)="startVideo()">start local video</button>\n\n                <ion-list-header>\n                    Remote things\n                </ion-list-header>\n\n                <button ion-item menuClose *ngIf="!audioRemoteMuted" (tap)="muteRemoteAudio()">mute remote audio</button>\n                <button ion-item menuClose *ngIf="audioRemoteMuted" (tap)="unmuteRemoteAudio()">unmute remote audio</button>\n\n                <button ion-item menuClose *ngIf="!videoRemoteMuted" (tap)="muteRemoteVideo()">mute remote video</button>\n                <button ion-item menuClose *ngIf="videoRemoteMuted" (tap)="unmuteRemoteVideo()">unmute remote video</button>\n            </div>\n            <ion-list-header>\n                Other things\n            </ion-list-header>\n            <button ion-item menuClose (tap)="joinRoom()" *ngIf="webrtc && readyToCall && webrtc.roomName != room">Join room</button>\n            <button ion-item menuClose (tap)="logOut()">Log out</button>\n\n        </ion-list>\n\n\n    </ion-content>\n</ion-menu>\n\n<ion-content #content>\n\n    <div *ngIf="isLoggedIn else loggedInIf">\n\n        <!--<ion-label>video currently {{video}}</ion-label>-->\n        <!--<ion-toggle checked="{{video}}" (tap)="videoChangedTap()" (ionChange)="videoChanged()" ></ion-toggle>-->\n\n\n\n        <div *ngIf="webrtc && webrtc.roomName == room && connEstablished; else waiting_content">\n\n\n\n\n\n            <ion-scroll scrollY="true" style="height: 200px;">\n                <ion-list *ngIf=" messages.length>0" class="messageList">\n\n                    <ion-item *ngFor="let message of messages">\n                        <h2>{{ message.message }}</h2>\n                        <p>From: {{ message.person }}</p>\n                        <ion-note item-end>{{ message.date }}</ion-note>\n                    </ion-item>\n\n                </ion-list>\n            </ion-scroll>\n            <ion-item style="border-top: 1px solid black">\n                <ion-input type="text" value="" placeholder="message" [(ngModel)]="websocketMessage"></ion-input>\n                <button item-right ion-button clear (tap)="sendMessageWebsocket()" [disabled]="websocketMessage == \'\'" item-right>send</button>\n\n            </ion-item>\n\n\n\n\n            <!-- ####### Since websockets are (almost) always superior, we should newer use WebRTC now  #####\n                <div>\n                    <ion-input type="text" value="" placeholder="message" [(ngModel)]="webRTCMessage"></ion-input>\n                    <button ion-button (tap)="sendMessageWebRTC()">send webRTC</button>\n                    <ion-textarea id="webrtcArea" readonly="true" style="border: solid 1px"></ion-textarea>\n                </div>\n                -->\n            <!-- REMOTE VIDEO -->\n            <div class="videoContainerRemote">\n                <!-- [ngStyle]="{\'visibility\': this.isLoggedIn ? \'visible\': \'hidden\'}"-->\n                <div id="remoteVideo" style="height: 150px; border: 1px solid"></div>\n                <!--<meter id="localVolume" class="volume" min="-45" max="-20" high="-25" low="-40"></meter>-->\n            </div>\n        </div>\n\n        <!--<button ion-button (tap)="startVideo()" *ngIf="webrtc &&  webrtc.roomName == room && !video && connEstablished">Start video</button>\n            <button ion-button (tap)="stopVideo()" *ngIf="webrtc && webrtc.roomName == room && video && connEstablished">Stop video</button>-->\n\n\n        <!-- ELSE BLOCk -->\n        <ng-template #waiting_content>\n            <h2>Waiting...</h2>\n            <ion-spinner></ion-spinner>\n\n\n        </ng-template>\n\n\n\n\n    </div>\n    <!--"start page" settings-->\n    <ng-template #loggedInIf>\n        <ion-list>\n            <ion-item>\n                <ion-label fixed>Room name</ion-label>\n                <ion-input type="text" value="" placeholder="enter name here" [(ngModel)]="room"></ion-input>\n            </ion-item>\n            <ion-item>\n                <ion-label fixed>Auto join</ion-label>\n                <ion-toggle checked="{{autoJoin}}" (ionChange)="autoJoin = !autoJoin"></ion-toggle>\n            </ion-item>\n            <ion-item>\n                <ion-label fixed>Video</ion-label>\n                <ion-toggle checked="{{video}}" (ionChange)="video = !video"></ion-toggle>\n            </ion-item>\n        </ion-list>\n        <div padding>\n            <button ion-button color="primary" block (tap)="signIn()">Enter room</button>\n        </div>\n\n\n    </ng-template>\n</ion-content>'/*ion-inline-end:"/Users/Zerododici/git/ionProject/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"D:\Programming\ionic\splinxs\ionProject\src\app\app.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle icon-only>\n\n      <ion-icon name=\'menu\' [ngStyle]="{\'color\': connEstablished ? \'green\' : \'red\'}"></ion-icon>\n\n    </button>\n\n        <ion-title *ngIf="!isLoggedIn">\n\n\n\n            Ionic Blank\n\n        </ion-title>\n\n        <ion-title *ngIf="isLoggedIn">\n\n\n\n            Room name: {{room}}\n\n        </ion-title>\n\n        <div class="videoContainerLocal">\n\n            <!-- [ngStyle]="{\'visibility\': this.isLoggedIn ? \'visible\': \'hidden\'}"-->\n\n            <video id="localVideo"></video>\n\n            <!--<meter id="localVolume" class="volume" min="-45" max="-20" high="-25" low="-40"></meter>-->\n\n        </div>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<!--- ############# Menu ############ -->\n\n<ion-menu type="overlay" [content]="content">\n\n    <ion-header>\n\n        <ion-toolbar>\n\n            <ion-title>Menu</ion-title>\n\n        </ion-toolbar>\n\n    </ion-header>\n\n    <ion-content>\n\n        <ion-list>\n\n            <div *ngIf="webrtc && webrtc.roomName == room && connEstablished">\n\n                <ion-list-header>\n\n                    Local settings\n\n                </ion-list-header>\n\n                <button ion-item menuClose *ngIf="!audioMuted" (tap)="muteAudio()">mute local audio</button>\n\n                <button ion-item menuClose *ngIf="audioMuted" (tap)="unmuteAudio()">unmute local audio</button>\n\n\n\n                <button ion-item menuClose *ngIf="!videoMuted" (tap)="muteVideo()">mute local video</button>\n\n                <button ion-item menuClose *ngIf="videoMuted" (tap)="unmuteVideo()">unmute local video</button>\n\n\n\n                <button ion-item menuClose *ngIf="!audioMuted" (tap)="stopAudio()">stop local audio</button>\n\n                <button ion-item menuClose *ngIf="audioMuted" (tap)="startAudio()">start local audio</button>\n\n\n\n                <button ion-item menuClose *ngIf="video" (tap)="stopVideo()">stop local video</button>\n\n                <button ion-item menuClose *ngIf="!video" (tap)="startVideo()">start local video</button>\n\n\n\n                <ion-list-header>\n\n                    Remote things\n\n                </ion-list-header>\n\n\n\n                <button ion-item menuClose *ngIf="!audioRemoteMuted" (tap)="muteRemoteAudio()">mute remote audio</button>\n\n                <button ion-item menuClose *ngIf="audioRemoteMuted" (tap)="unmuteRemoteAudio()">unmute remote audio</button>\n\n\n\n                <button ion-item menuClose *ngIf="!videoRemoteMuted" (tap)="muteRemoteVideo()">mute remote video</button>\n\n                <button ion-item menuClose *ngIf="videoRemoteMuted" (tap)="unmuteRemoteVideo()">unmute remote video</button>\n\n            </div>\n\n            <ion-list-header>\n\n                Other things\n\n            </ion-list-header>\n\n            <button ion-item menuClose (tap)="joinRoom()" *ngIf="webrtc && readyToCall && webrtc.roomName != room">Join room</button>\n\n            <button ion-item menuClose (tap)="logOut()">Log out</button>\n\n\n\n        </ion-list>\n\n\n\n\n\n    </ion-content>\n\n</ion-menu>\n\n\n\n<ion-content #content>\n\n\n\n    <div *ngIf="isLoggedIn else loggedInIf">\n\n\n\n        <!--<ion-label>video currently {{video}}</ion-label>-->\n\n        <!--<ion-toggle checked="{{video}}" (tap)="videoChangedTap()" (ionChange)="videoChanged()" ></ion-toggle>-->\n\n\n\n\n\n\n\n        <div *ngIf="webrtc && webrtc.roomName == room && connEstablished; else waiting_content">\n\n\n\n\n\n\n\n\n\n\n\n            <ion-scroll scrollY="true" style="height: 200px;">\n\n                <ion-list *ngIf=" messages.length>0" class="messageList">\n\n\n\n                    <ion-item *ngFor="let message of messages">\n\n                        <h2>{{ message.message }}</h2>\n\n                        <p>From: {{ message.person }}</p>\n\n                        <ion-note item-end>{{ message.date }}</ion-note>\n\n                    </ion-item>\n\n\n\n                </ion-list>\n\n            </ion-scroll>\n\n            <ion-item style="border-top: 1px solid black">\n\n                <ion-input type="text" value="" placeholder="message" [(ngModel)]="websocketMessage"></ion-input>\n\n                <button item-right ion-button clear (tap)="sendMessageWebsocket()" [disabled]="websocketMessage == \'\'" item-right>send</button>\n\n\n\n            </ion-item>\n\n\n\n\n\n\n\n\n\n            <!-- ####### Since websockets are (almost) always superior, we should newer use WebRTC now  #####\n\n                <div>\n\n                    <ion-input type="text" value="" placeholder="message" [(ngModel)]="webRTCMessage"></ion-input>\n\n                    <button ion-button (tap)="sendMessageWebRTC()">send webRTC</button>\n\n                    <ion-textarea id="webrtcArea" readonly="true" style="border: solid 1px"></ion-textarea>\n\n                </div>\n\n                -->\n\n            <!-- REMOTE VIDEO -->\n\n            <div class="videoContainerRemote" overflow-scroll="true">\n\n                <!-- [ngStyle]="{\'visibility\': this.isLoggedIn ? \'visible\': \'hidden\'}"-->\n\n                <div id="remoteVideo" style="height: 150px; border: 1px solid" overflow-scroll="true"></div>\n\n                <!--<meter id="localVolume" class="volume" min="-45" max="-20" high="-25" low="-40"></meter>-->\n\n            </div>\n\n        </div>\n\n\n\n        <!--<button ion-button (tap)="startVideo()" *ngIf="webrtc &&  webrtc.roomName == room && !video && connEstablished">Start video</button>\n\n            <button ion-button (tap)="stopVideo()" *ngIf="webrtc && webrtc.roomName == room && video && connEstablished">Stop video</button>-->\n\n\n\n\n\n        <!-- ELSE BLOCk -->\n\n        <ng-template #waiting_content>\n\n            <h2>Waiting...</h2>\n\n            <ion-spinner></ion-spinner>\n\n\n\n\n\n        </ng-template>\n\n\n\n\n\n\n\n\n\n    </div>\n\n    <!--"start page" settings-->\n\n    <ng-template #loggedInIf>\n\n        <ion-list>\n\n            <ion-item>\n\n                <ion-label fixed>Room name</ion-label>\n\n                <ion-input type="text" value="" placeholder="enter name here" [(ngModel)]="room"></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label fixed>Auto join</ion-label>\n\n                <ion-toggle checked="{{autoJoin}}" (ionChange)="autoJoin = !autoJoin"></ion-toggle>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label fixed>Video</ion-label>\n\n                <ion-toggle checked="{{video}}" (ionChange)="video = !video"></ion-toggle>\n\n            </ion-item>\n\n        </ion-list>\n\n        <div padding>\n\n            <button ion-button color="primary" block (tap)="signIn()">Enter room</button>\n\n        </div>\n\n        <div padding>\n\n            <button ion-button color="primary" block (tap)="modalLang()">Show lang</button>\n\n        </div>\n\n\n\n\n\n    </ng-template>\n\n</ion-content>'/*ion-inline-end:"D:\Programming\ionic\splinxs\ionProject\src\app\app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ModalController */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 260:
+/***/ 263:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(48);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -481,14 +559,14 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/Zerododici/git/ionProject/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Ionic Blank\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  The world is your oyster.\n  <p>\n    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.\n  </p>\n</ion-content>\n'/*ion-inline-end:"/Users/Zerododici/git/ionProject/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"D:\Programming\ionic\splinxs\ionProject\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Ionic Blank\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  The world is your oyster.\n\n  <p>\n\n    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.\n\n  </p>\n\n</ion-content>\n\n'/*ion-inline-end:"D:\Programming\ionic\splinxs\ionProject\src\pages\home\home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]])
 ], HomePage);
 
 //# sourceMappingURL=home.js.map
 
 /***/ })
 
-},[191]);
+},[194]);
 //# sourceMappingURL=main.js.map

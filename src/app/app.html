@@ -78,9 +78,9 @@
         <div *ngIf="webrtc && webrtc.roomName == room && connEstablished; else waiting_content">
 
 
+            <chat-component [params]="params" ></chat-component>
 
-
-
+            <!--
             <ion-scroll scrollY="true" style="height: 200px;">
                 <ion-list *ngIf=" messages.length>0" class="messageList">
 
@@ -93,12 +93,11 @@
                 </ion-list>
             </ion-scroll>
             <ion-item style="border-top: 1px solid black">
-                <ion-input type="text" value="" placeholder="message" [(ngModel)]="websocketMessage"></ion-input>
+                <ion-textarea type="text" value="" placeholder="message" [(ngModel)]="websocketMessage" fz-elastic></ion-textarea>
                 <button item-right ion-button clear (tap)="sendMessageWebsocket()" [disabled]="websocketMessage == ''" item-right>send</button>
 
             </ion-item>
-
-
+            -->
 
 
             <!-- ####### Since websockets are (almost) always superior, we should newer use WebRTC now  #####
@@ -109,9 +108,9 @@
                 </div>
                 -->
             <!-- REMOTE VIDEO -->
-            <div class="videoContainerRemote">
+            <div class="videoContainerRemote" overflow-scroll="true">
                 <!-- [ngStyle]="{'visibility': this.isLoggedIn ? 'visible': 'hidden'}"-->
-                <div id="remoteVideo" style="height: 150px; border: 1px solid"></div>
+                <div id="remoteVideo" style="height: 150px; border: 1px solid" overflow-scroll="true"></div>
                 <!--<meter id="localVolume" class="volume" min="-45" max="-20" high="-25" low="-40"></meter>-->
             </div>
         </div>
@@ -146,6 +145,10 @@
             <ion-item>
                 <ion-label fixed>Video</ion-label>
                 <ion-toggle checked="{{video}}" (ionChange)="video = !video"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label fixed>Tourist</ion-label>
+                <ion-toggle checked="{{!isGuide}}" (ionChange)="isGuide = !isGuide"></ion-toggle>
             </ion-item>
         </ion-list>
         <div padding>

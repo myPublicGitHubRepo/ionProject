@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Platform, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { ChatComponent } from '../components/chat/chat';
 
 
 
@@ -17,11 +17,15 @@ declare var SimpleWebRTC: any;
   templateUrl: 'app.html'
 })
 export class MyApp {
+  @ViewChild(ChatComponent) Chat: ChatComponent;
+
+  isGuide: boolean = false;
+
   isLoggedIn: boolean = false;
 
   // grab the room from the URL
   //var room = location.search && location.search.split('?')[1];
-  room: string = "test";
+  room: string = "test199875Splinxs!!!";
 
   websocketMessage: string = "";
   webRTCMessage: string = "";
@@ -46,7 +50,7 @@ export class MyApp {
 
   messages: { date: string, message: string, person: string }[] = [];
 
-
+  params: any;
 
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public modalController: ModalController) { //public androidPermissions: AndroidPermissions
@@ -56,41 +60,52 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       //this.checkPermission();
-      var permissions = cordova.plugins.permissions;
 
+      //do not check if website
+      if(platform.is("cordova")){
+        var permissions = cordova.plugins.permissions;
+        
+        
+              permissions.hasPermission(permissions.CAMERA, function (status) {
+                if (status.hasPermission) {
+                  console.log("Yes :D ");
+                }
+                else {
+                  console.warn("No :( I will ask for permission now");
+        
+                  permissions.requestPermission(permissions.CAMERA, function success(status) {
+                    if (!status.hasPermission) { console.log("cam error") };
+                  }, function error() {
+                    console.warn('Camera permission is not turned on');
+                  });
+                }
+              });
 
-      permissions.hasPermission(permissions.CAMERA, function (status) {
-        if (status.hasPermission) {
-          console.log("Yes :D ");
-        }
-        else {
-          console.warn("No :( I will ask for permission now");
+              permissions.hasPermission(permissions.RECORD_AUDIO, function (status) {
+                if (status.hasPermission) {
+                  console.log("Yes :D ");
+                }
+                else {
+                  console.warn("No Mic :( I will ask for permission now");
+        
+                  permissions.requestPermission(permissions.RECORD_AUDIO, function success(status) {
+                    if (!status.hasPermission) { console.log("audio error") };
+                  }, function error() {
+                    console.warn('audio permission is not turned on');
+                  });
+        
+                }
+              });
+      }
 
-          permissions.requestPermission(permissions.CAMERA, function success(status) {
-            if (!status.hasPermission) { console.log("cam error") };
-          }, function error() {
-            console.warn('Camera permission is not turned on');
-          });
-        }
-      });
-
-
-      permissions.hasPermission(permissions.RECORD_AUDIO, function (status) {
-        if (status.hasPermission) {
-          console.log("Yes :D ");
-        }
-        else {
-          console.warn("No Mic :( I will ask for permission now");
-
-          permissions.requestPermission(permissions.RECORD_AUDIO, function success(status) {
-            if (!status.hasPermission) { console.log("audio error") };
-          }, function error() {
-            console.warn('audio permission is not turned on');
-          });
-
-        }
-      });
+      
     });
+
+
+  }
+
+  ngOnInit(){
+    this.params = { sender: (message: string) => { this.sendMessage(message) } };
   }
 
   openPage() {
@@ -190,24 +205,14 @@ export class MyApp {
     this.room = "";
   }
 
+  sendMessage(message){
+    this.sendMessageWebsocket();
+  }
+
   sendMessageWebsocket() {
-    if (this.websocketMessage != "") {
       this.webrtc.sendToAll('websocket-message', {
         message: this.websocketMessage
       });
-
-      //this.appendWebsocketText("Me: " + this.websocketMessage);
-
-      this.messages.push(
-        {
-          date: new Date().toLocaleTimeString(),
-          message: this.websocketMessage,
-          person: "me"
-        }
-      );
-
-      this.websocketMessage = "";
-    }
   }
 
   sendMessageWebRTC() {
@@ -258,17 +263,23 @@ export class MyApp {
   }
   startVideo() {
     console.log("Button clicked")
-
+    
     this.video = true;
-    this.webrtc.startLocalVideo();
+    this.webrtc.config.media.video = true;
+    this.webrtc.startLocalVideo();    
+
     //this.videoMuted = false;
-    //  this.webrtc.config.media.video = true;
+    //this.webrtc.resumeVideo();
+
+    //this.videoMuted = false;
+    
   }
 
   stopVideo() {
     console.log("stop Button clicked")
     this.webrtc.stopLocalVideo();
     this.video = false;
+    this.webrtc.config.media.video = false;
     //this.videoMuted = true;
     //this.webrtc.config.media.video = false;
   }
@@ -284,6 +295,13 @@ export class MyApp {
 
       this.initWebRTC();
       this.isLoggedIn = true;
+
+      this.video = !this.isGuide;
+      
+      if(this.isGuide){
+        
+        
+      }
 
       //this.joinRoom();
     }
@@ -306,7 +324,7 @@ export class MyApp {
       detectSpeakingEvents: true,
       autoAdjustMic: true,
       // turn off video
-      media: { audio: true, video: this.video },
+      media: { audio: true, video: !this.isGuide },
       enableDataChannels: true
     });
 
@@ -352,7 +370,7 @@ export class MyApp {
       if (message.type == 'videoChanged') {
         console.log("message recived")
         //this.video = this.message.payload.video;
-        debugger;
+        
       }
 
       if (message.type === 'websocket-message') {
@@ -411,13 +429,13 @@ export class MyApp {
       console.log("video removed :(")
 
       //var remoteVideo = document.getElementById('remoteVideo');
-      //debugger;
+      
 
       //console.log(this.webrtc.getDomId(peer));
 
       /*
       var el = document.getElementById(peer ? 'container_' + this.webrtc.getDomId(peer) : 'localVideo');
-      debugger;
+      
       if (remoteVideo && el) {
         remoteVideo.removeChild(el);
 
@@ -430,7 +448,7 @@ export class MyApp {
       if (remEl) {
         while (remEl.hasChildNodes()) {
           remEl.removeChild(remEl.firstChild);
-          debugger;
+          
         }
 
       }

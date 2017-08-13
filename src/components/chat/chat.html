@@ -1,0 +1,15 @@
+<div>
+    <ion-scroll scrollY="true" style="height: 200px;">
+      <ion-list *ngIf=" messages.length>0" class="messageList">
+        <ion-item *ngFor="let message of messages">
+          <h2>{{ message.message }}</h2>
+          <p>From: {{ message.person }}</p>
+          <ion-note item-end>{{ message.date }}</ion-note>
+        </ion-item>
+      </ion-list>
+    </ion-scroll>
+    <ion-item style="border-top: 1px solid black">
+      <ion-textarea type="text" value="" placeholder="message" [(ngModel)]="message"></ion-textarea>
+      <button item-right ion-button clear (tap)="sendMessage()" [disabled]="message == ''" item-right>send</button>
+    </ion-item>
+  </div>
