@@ -7,3 +7,9 @@ export class MessageModel{
     }
 
 }
+
+//TODO inherit and stuff
+//text message
+//image message
+//map message
+//

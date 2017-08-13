@@ -724,6 +724,11 @@ var MessageModel = (function () {
     return MessageModel;
 }());
 
+//TODO inherit and stuff
+//text message
+//image message
+//map message
+// 
 //# sourceMappingURL=message-model.js.map
 
 /***/ }),
@@ -737,7 +742,7 @@ var MessageTypes;
 (function (MessageTypes) {
     MessageTypes[MessageTypes["text"] = 1] = "text";
     MessageTypes[MessageTypes["image"] = 2] = "image";
-    MessageTypes[MessageTypes["location"] = 3] = "location";
+    MessageTypes[MessageTypes["map"] = 3] = "map";
 })(MessageTypes || (MessageTypes = {}));
 //# sourceMappingURL=messageTypes-enum.js.map
 
